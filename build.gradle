@@ -2,6 +2,7 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.4.0'
 	id 'io.spring.dependency-management' version '1.1.6'
+	id 'application'
 }
 
 group = 'jardigenie'
@@ -38,4 +39,18 @@ dependencies {
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+task npmInstall(type: Exec) {
+	workingDir = projectDir
+	commandLine 'npm', 'install'
+}
+
+task buildCss(type: Exec) {
+	workingDir = projectDir
+	commandLine 'npm', 'run', 'build:css'
+}
+
+build {
+	dependsOn npmInstall, buildCss
 }

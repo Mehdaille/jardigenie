@@ -1,13 +1,13 @@
-package fr.eni.jardigenie;
+package demo.jardigenie;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class JardigenieApplication {
+public class DemoApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(JardigenieApplication.class, args);
+		SpringApplication.run(DemoApplication.class, args);
 	}
 
 }

@@ -1,14 +1,19 @@
-package fr.eni.jardigenie.bo;
+package demo.jardigenie.bo;
 
 public class Category {
 
     private Long id;
     private String libelle;
 
+    public Category() {
+        super();
+    }
+
     public Category(Long id, String libelle) {
         this.id = id;
         this.libelle = libelle;
     }
+
 
     public Long getId() {
         return id;

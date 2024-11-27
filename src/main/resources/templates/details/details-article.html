@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="fr"
+      layout:decorate="~{layout/base}">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des articles</title>
+</head>
+<body>
+<div layout:fragment="content">
+
+    <div class="max-w-3xl mx-auto p-6 bg-white shadow-md rounded-lg">
+        <h1 class="text-4xl font-bold mb-6 text-center">Détails du produit</h1>
+
+        <img th:src="${article.image}" alt="Image d'un produit" class="w-full max-w-xs h-auto object-contain mx-auto rounded-lg shadow-md">
+
+
+        <ul class="space-y-4">
+            <li class="text-2xl font-semibold" th:text="${article.nom}"></li>
+            <li class="text-lg text-gray-700" th:text="${'Catégorie : ' + article.category.libelle}"></li>
+            <li class="text-xl text-green-600 font-bold" th:text="${'Prix : ' + article.prix + ' €'}"></li>
+            <li class="text-base text-gray-600 leading-relaxed"
+                th:text="${'Description : ' + article.description}"></li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

@@ -1,4 +1,4 @@
-package fr.eni.jardigenie.bo;
+package demo.jardigenie.bo;
 
 public class Article {
 
