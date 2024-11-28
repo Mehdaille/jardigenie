@@ -3,13 +3,15 @@
       layout:decorate="~{layout/base}">
 <head>
     <meta charset="UTF-8">
-    <title>Liste des articles</title>
+    <title>Ajout d'un articles</title>
 </head>
 <body>
 <div layout:fragment="content">
 
     <h1 class="text-3xl font-bold text-center mb-8">Formulaire d'articles</h1>
-    <form th:action="@{/article-form}" method="post" th:object="${article}" class="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-md space-y-6">
+    <form th:action="@{/article-form}" method="post" th:object="${article}"
+          class="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-md space-y-6">
+
         <input th:field="*{id}" type="hidden">
 
         <!-- Nom de l'article -->
@@ -17,20 +19,33 @@
             <label for="nom" class="block text-sm font-medium text-gray-700">Nom de l'article</label>
             <input th:field="*{nom}" type="text" id="nom" placeholder="Veuillez saisir un nom d'article"
                    class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+            <ul th:if="${#fields.hasErrors('nom')}">
+                <li class="text-red-500" th:each="error:${#fields.errors('nom')}" th:text="${error}">
+                </li>
+            </ul>
         </div>
 
         <!-- Description -->
         <div>
             <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
-            <input th:field="*{description}" type="text" id="description" placeholder="Veuillez saisir une description de l'article"
+            <input th:field="*{description}" type="text" id="description"
+                   placeholder="Veuillez saisir une description de l'article"
                    class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+            <ul th:if="${#fields.hasErrors('description')}">
+                <li class="text-red-500" th:each="error:${#fields.errors('description')}" th:text="${error}">
+                </li>
+            </ul>
         </div>
 
         <!-- Prix -->
         <div>
             <label for="prix" class="block text-sm font-medium text-gray-700">Prix</label>
-            <input th:field="*{prix}" type="number" id="prix" placeholder="Veuillez saisir le prix de l'article"
+            <input th:field="*{prix}" type="number" step="0.01" min="0" id="prix" placeholder="Veuillez saisir le prix de l'article"
                    class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+            <ul th:if="${#fields.hasErrors('prix')}">
+                <li class="text-red-500" th:each="error:${#fields.errors('prix')}" th:text="${error}">
+                </li>
+            </ul>
         </div>
 
         <!-- Image -->
@@ -45,14 +60,15 @@
             <label for="category" class="block text-sm font-medium text-gray-700">Catégorie</label>
             <select th:field="*{category}" id="category"
                     class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
-                <option value="" disabled selected>Choisir une catégorie</option>
-                <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.libelle}"></option>
+                <option th:each="category : ${categories}" th:value="${category.id}"
+                        th:text="${category.libelle}"></option>
             </select>
         </div>
 
         <!-- Bouton de soumission -->
         <div>
-            <button type="submit" class="w-full bg-indigo-600 text-white py-2 px-4 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">
+            <button type="submit"
+                    class="w-full bg-indigo-600 text-white py-2 px-4 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">
                 Enregistrer
             </button>
         </div>

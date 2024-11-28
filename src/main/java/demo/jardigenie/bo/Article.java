@@ -1,11 +1,22 @@
 package demo.jardigenie.bo;
 
+
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PositiveOrZero;
+
 public class Article {
 
     private Long id;
+    @NotBlank(message = "Le nom doit être renseigné")
     private String nom;
+    @NotBlank(message="La description doit être renseigné")
     private String description;
-    private double prix;
+    @NotNull(message = "Le prix doit être renseigné") // Utilisez cette contrainte seulement pour les objets
+    @PositiveOrZero(message = "Le prix doit être supérieur ou égal à 0.0 €")
+    private Double prix;
+    @NotBlank(message = "L''image doit être renseignée")
     private String image;
     private Category category;
 
@@ -13,13 +24,17 @@ public class Article {
         super();
     }
 
-    public Article(Long id, String nom, String description, double prix, String image, Category category) {
+    public Article(Long id, String nom, String description, Double prix, String image) {
         super();
         this.id = id;
         this.nom = nom;
         this.description = description;
         this.prix = prix;
         this.image = image;
+    }
+
+    public Article(Long id, String nom, String description, Double prix, String image, Category category) {
+        this(id, nom, description, prix, image);
         this.category = category;
     }
 
@@ -47,11 +62,11 @@ public class Article {
         this.description = description;
     }
 
-    public double getPrix() {
+    public Double getPrix() {
         return prix;
     }
 
-    public void setPrix(double prix) {
+    public void setPrix(Double prix) {
         this.prix = prix;
     }
 

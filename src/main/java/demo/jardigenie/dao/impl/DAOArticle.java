@@ -57,7 +57,7 @@ public class DAOArticle implements IDAOArticle {
 
     private String sqlSelectAllArticles = "SELECT a.id_article, a.nom, a.description, a.prix, a.image, c.id_category AS id_category, c.libelle FROM article a JOIN category c ON a.CATEGORY_id_category = c.id_category";
     private String sqlSelectArticleById = "SELECT a.id_article, a.nom, a.description, a.prix, a.image, c.id_category AS id_category, c.libelle FROM article a JOIN category c ON a.CATEGORY_id_category = c.id_category WHERE a.id_article = ?";
-    private String sqlInsertArticle = "INSERT INTO article(id_article, nom, description, prix, image, id_category) VALUES (:idArticle, :nom, :description, :prix, :image, :category)";
+    private String sqlInsertArticle = "INSERT INTO article(id_article, nom, description, prix, image, CATEGORY_id_category) VALUES (:idArticle, :nom, :description, :prix, :image, :category)";
     private String sqlUpdateArticle = "UPDATE article SET nom = :nom, description = :description, prix = :prix, image = :image, CATEGORY_id_category = :category WHERE id_article = :idArticle";
     private String sqlDeleteArticle = "DELETE FROM article WHERE id_article = :idArticle";
 

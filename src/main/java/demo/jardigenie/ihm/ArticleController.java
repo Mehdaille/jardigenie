@@ -9,10 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -50,45 +47,52 @@ public class ArticleController {
     @GetMapping({"/show-article-form/{id}", "/show-article-form"})
     public String showFormArticle(@PathVariable(required = false) Long id, Model model) {
 
-        Article article = new Article();
-
-        if (id != null) {
-            article = articleManager.getArticleById(id);
+        if (!model.containsAttribute("article")) {
+            Article article = (id != null) ? articleManager.getArticleById(id) : new Article();
+            model.addAttribute("article", article);
         }
 
-        model.addAttribute("article", article);
-
         List<Category> categories = articleManager.getAllCategories();
-
         model.addAttribute("categories", categories);
 
         return "form/form-article";
     }
 
     @PostMapping("/article-form")
-    public String articleForm(@Valid @ModelAttribute("article") Article article, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
-
-        List<Category> categories = articleManager.getAllCategories();
-
-        model.addAttribute("categories", categories);
+    public String articleForm(@Valid @ModelAttribute Article article, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
 
         if (bindingResult.hasErrors()) {
-            return "form/form-article";
+            redirectAttributes.addFlashAttribute("flashMessage", new JardigenieFlashMessage(JardigenieFlashMessage.TYPE_FLASH_ERROR, "Veuillez renseigner correctement l'article"));
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.article", bindingResult);
+            redirectAttributes.addFlashAttribute("article", article);
+            return "redirect:/show-article-form";
         }
+
+        List<Category> categories = articleManager.getAllCategories();
+        model.addAttribute("categories", categories);
+
 
         if (article.getId() == null) {
             articleManager.saveArticle(article);
+            redirectAttributes.addFlashAttribute("flashMessage", new JardigenieFlashMessage(JardigenieFlashMessage.TYPE_FLASH_SUCCES, "L'article a été ajouté à la liste des articles"));
             return "redirect:/list-articles";
-        }
-
-        if (article.getId() != null) {
+        } else {
             articleManager.updateArticle(article);
-            return "redirect:/list-articles";
+            redirectAttributes.addFlashAttribute("flashMessage", new JardigenieFlashMessage(JardigenieFlashMessage.TYPE_FLASH_SUCCES, "L'article a été modifié avec succès"));
         }
-
-        return "redirect:/";
+            return "redirect:/list-articles";
     }
 
+    @GetMapping("/delete-article/{id}")
+    public String deleteArticle(@PathVariable Long id) {
+
+        if (articleManager.getArticleById(id) == null) {
+            System.out.println("erreur");
+        } else {
+            articleManager.deleteArticle(articleManager.getArticleById(id));
+        }
+        return "redirect:/list-articles";
+    }
 
     @GetMapping("/")
     public String home() {
