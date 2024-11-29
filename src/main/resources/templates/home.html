@@ -2,12 +2,41 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="fr"
       layout:decorate="~{layout/base}">
 <head>
-  <meta charset="UTF-8">
-  <title>Liste des articles</title>
+    <meta charset="UTF-8">
+    <title>Liste des articles</title>
 </head>
 <body>
 <div layout:fragment="content">
-  <h1>Bienvenue chez JardiGenie</h1>
+    <div class="bg-gray-100 p-8 rounded-lg shadow-lg">
+        <h1 class=" flex items-center text-4xl font-bold text-green-600 mb-4">Bienvenue chez JardiGenie     <img class="ml-4" th:src="@{/images/logojardigenie.png}" alt="image du site" style="width: 2em; height: 2em;"></h1>
+        <br><br>
+        <p class="text-lg text-gray-700 leading-relaxed">
+            Découvrez tout ce dont vous avez besoin pour donner vie à vos projets de jardinage et de bricolage ! Que vous
+            soyez un passionné de jardinage ou un bricoleur chevronné, nous vous proposons une large gamme d’outils, de
+            matériaux et de conseils pour transformer vos idées en réalité.
+        </p>
+        <br><br>
+        <ul class="mt-4 space-y-2">
+            <li class="flex items-start">
+                <span class="text-green-600 text-2xl mr-2">🌿</span>
+                <p><strong>Côté Jardin</strong> : Plantes, semences, outillage et astuces pour un jardin épanoui toute l’année.</p>
+            </li>
+            <br>
+            <li class="flex items-start">
+                <span class="text-yellow-600 text-2xl mr-2">🔨</span>
+                <p><strong>Côté Bricolage</strong> : Outils, matériaux et équipements pour vos rénovations et créations.</p>
+            </li>
+            <br>
+            <li class="flex items-start">
+                <span class="text-blue-600 text-2xl mr-2">💡</span>
+                <p>Des conseils experts et des produits sélectionnés pour leur qualité, afin de vous accompagner dans tous vos projets.</p>
+            </li>
+        </ul>
+        <br>
+        <div class="mt-6 flex items-center text-xl font-semibold text-gray-800">
+            <p>Lancez-vous dès aujourd’hui et faites fleurir vos envies avec <span class="text-green-600">JardiGenie</span> !</p>
+        </div>
+    </div>
 </div>
 </body>
 </html>

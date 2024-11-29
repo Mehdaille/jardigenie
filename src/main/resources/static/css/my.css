@@ -11,3 +11,30 @@
     transform: scale(1);
     transition: opacity 0.1s ease-out, transform 0.1s ease-out;
 }
+
+/* Appliquer une hauteur minimum à l'élément body */
+body {
+    min-height: 100vh; /* Prend au moins la hauteur de la fenêtre */
+    margin: 0; /* Supprime les marges par défaut */
+    display: flex;
+    flex-direction: column; /* Utilisation du Flexbox pour structurer la page */
+}
+
+/* Le contenu prend toute la place disponible */
+.content {
+    flex-grow: 1; /* Assure que le contenu principal prend tout l'espace */
+}
+
+/* Le footer sera positionné en bas */
+.footer {
+    background-color: #2d3748; /* Couleur de fond */
+    color: white; /* Couleur du texte */
+    padding: 20px 0; /* Espacement */
+    text-align: center; /* Centrer le texte */
+    width: 100%; /* Prend toute la largeur */
+}
+
+/* Pour container si tu as besoin de contrôler la largeur du footer */
+.container {
+    width: 100%;
+}

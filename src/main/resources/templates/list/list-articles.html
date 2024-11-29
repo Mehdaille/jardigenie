@@ -9,7 +9,7 @@
 <div layout:fragment="content">
     <h1 class="text-3xl font-bold text-center my-8">Liste des articles</h1>
 
-    <form method="GET" action="/list-articles" class="mb-4 flex justify-center">
+    <form method="GET" th:action="@{/list-articles}" class="mb-4 flex justify-center">
         <select name="categoryId" class="border border-gray-300 rounded p-2 mr-4">
             <option value="">Toutes les catégories</option>
             <option th:each="cat : ${categories}"

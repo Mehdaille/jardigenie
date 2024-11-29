@@ -94,16 +94,16 @@ public class ArticleController {
             return "redirect:/list-articles";
     }
 
-    @GetMapping("/delete-article/{id}")
+    @DeleteMapping("/delete-article/{id}")
     public String deleteArticle(@PathVariable Long id) {
-
         if (articleManager.getArticleById(id) == null) {
-            System.out.println("erreur");
+            System.out.println("Erreur : article non trouvé");
         } else {
             articleManager.deleteArticle(articleManager.getArticleById(id));
         }
         return "redirect:/list-articles";
     }
+
 
     @GetMapping("/")
     public String home() {
