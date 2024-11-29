@@ -1,5 +1,6 @@
 package demo.jardigenie.dao;
 
+import demo.jardigenie.bo.Article;
 import demo.jardigenie.bo.Category;
 
 import java.util.List;

@@ -11,6 +11,8 @@ public interface IArticleManager {
 
     Article getArticleById(Long id);
 
+    List<Article> getArticlesByCategoryId(Long idCategory);
+
     List<Category> getAllCategories();
 
     Category getCategoryById(Long id);

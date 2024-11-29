@@ -16,7 +16,6 @@ public class Article {
     @NotNull(message = "Le prix doit être renseigné") // Utilisez cette contrainte seulement pour les objets
     @PositiveOrZero(message = "Le prix doit être supérieur ou égal à 0.0 €")
     private Double prix;
-    @NotBlank(message = "L''image doit être renseignée")
     private String image;
     private Category category;
 

@@ -21,14 +21,26 @@ public class ArticleController {
     private IArticleManager articleManager;
 
     @GetMapping("/list-articles")
-    public String showListArticles(Model model) {
+    public String showListArticles(@RequestParam(value = "categoryId", required = false) Long categoryId, Model model) {
+        List<Article> articles;
 
-        List<Article> articles = articleManager.getAllArticles();
+        if (categoryId != null) {
+            articles = articleManager.getArticlesByCategoryId(categoryId); // À implémenter dans le service
+        } else {
+            articles = articleManager.getAllArticles();
+        }
 
+        // Récupération de toutes les catégories pour le filtre
+        List<Category> categories = articleManager.getAllCategories(); // À implémenter dans le service
+        model.addAttribute("categories", categories);
         model.addAttribute("articles", articles);
+        model.addAttribute("selectedCategoryId", categoryId);
 
         return "list/list-articles";
     }
+
+
+
 
     @GetMapping("/details-article/{id}")
     public String showDetailArticle(@PathVariable Long id, Model model) {
@@ -70,7 +82,6 @@ public class ArticleController {
 
         List<Category> categories = articleManager.getAllCategories();
         model.addAttribute("categories", categories);
-
 
         if (article.getId() == null) {
             articleManager.saveArticle(article);

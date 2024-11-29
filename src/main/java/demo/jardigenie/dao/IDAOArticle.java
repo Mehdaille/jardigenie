@@ -10,6 +10,8 @@ public interface IDAOArticle {
 
     Article findArticleById(Long id);
 
+    List<Article> findArticlesByCategoryId(Long idCategory);
+
     void saveArticle (Article article);
 
     void updateArticle (Article article);

@@ -30,6 +30,11 @@ public class ArticleManager implements IArticleManager {
     }
 
     @Override
+    public List<Article> getArticlesByCategoryId(Long idCategory) {
+        return articleDao.findArticlesByCategoryId(idCategory);
+    }
+
+    @Override
     public List<Category> getAllCategories() {
         return categoryDao.findAllCategories();
     }
